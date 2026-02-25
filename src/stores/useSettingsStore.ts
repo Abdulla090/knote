@@ -16,14 +16,13 @@ export interface ThemePresetConfig {
     accentDark: string;
     primaryLight: string;
     accentLight: string;
-    image?: any; // require() image
 }
 
 export const THEME_PRESETS: ThemePresetConfig[] = [
     { key: 'default', label: 'Ember', primaryDark: '#FB923C', primaryLight: '#EA580C', accentDark: '#FB7185', accentLight: '#E11D48' },
-    { key: 'aurora', label: 'Aurora', primaryDark: '#67E8F9', primaryLight: '#0891B2', accentDark: '#A78BFA', accentLight: '#7C3AED', image: require('../../assets/themes/aurora.png') },
-    { key: 'sunset', label: 'Sunset', primaryDark: '#FBBF24', primaryLight: '#D97706', accentDark: '#FB7185', accentLight: '#DB2777', image: require('../../assets/themes/sunset.png') },
-    { key: 'ocean', label: 'Ocean', primaryDark: '#38BDF8', primaryLight: '#0284C7', accentDark: '#34D399', accentLight: '#059669', image: require('../../assets/themes/ocean.png') },
+    { key: 'aurora', label: 'Aurora', primaryDark: '#67E8F9', primaryLight: '#0891B2', accentDark: '#A78BFA', accentLight: '#7C3AED' },
+    { key: 'sunset', label: 'Sunset', primaryDark: '#FBBF24', primaryLight: '#D97706', accentDark: '#FB7185', accentLight: '#DB2777' },
+    { key: 'ocean', label: 'Ocean', primaryDark: '#38BDF8', primaryLight: '#0284C7', accentDark: '#34D399', accentLight: '#059669' },
     { key: 'mint', label: 'Mint', primaryDark: '#34D399', primaryLight: '#059669', accentDark: '#A78BFA', accentLight: '#7C3AED' },
     { key: 'rose', label: 'Rosé', primaryDark: '#FB7185', primaryLight: '#E11D48', accentDark: '#FBBF24', accentLight: '#D97706' },
 ];
