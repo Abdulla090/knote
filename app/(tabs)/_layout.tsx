@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Pressable, StyleSheet, Platform, Text } from 'react-native';
 import { Tabs, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
     FileText,
@@ -34,6 +35,7 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
     const { theme, isDark } = useTheme();
     const c = theme.colors;
     const router = useRouter();
+    const insets = useSafeAreaInsets();
 
     const tabs = [
         { route: 'index', label: 'Notes' },
@@ -51,6 +53,7 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
                     {
                         backgroundColor: isDark ? 'rgba(15, 15, 23, 0.92)' : 'rgba(255, 255, 255, 0.92)',
                         borderTopColor: c.tabBarBorder,
+                        paddingBottom: Math.max(insets.bottom, 10),
                     },
                 ]}
             >
@@ -212,9 +215,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         borderTopWidth: StyleSheet.hairlineWidth,
-        paddingBottom: Platform.OS === 'ios' ? 24 : 10,
         paddingTop: 8,
-        height: layout.tabBarHeight,
     },
     tabItem: {
         flex: 1,

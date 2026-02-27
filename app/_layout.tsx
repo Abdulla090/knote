@@ -6,9 +6,11 @@ import { StatusBar } from 'expo-status-bar';
 import { Stack } from 'expo-router';
 import Head from 'expo-router/head';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, ActivityIndicator, View, Text, TextInput, Platform } from 'react-native';
 import { useFonts } from 'expo-font';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as NavigationBar from 'expo-navigation-bar';
 import { ThemeProvider, useTheme } from '../src/contexts/ThemeContext';
 import { useNotesStore } from '../src/stores/useNotesStore';
 import { useFoldersStore } from '../src/stores/useFoldersStore';
@@ -51,6 +53,15 @@ const ONBOARDING_KEY = '@knote_onboarded';
 function AppContent() {
     const { theme, isDark } = useTheme();
     const appLanguage = useSettingsStore((s) => s.appLanguage);
+
+    // Make Android system navigation bar transparent so app goes edge-to-edge
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            NavigationBar.setBackgroundColorAsync('transparent');
+            NavigationBar.setPositionAsync('absolute');
+            NavigationBar.setButtonStyleAsync(isDark ? 'light' : 'dark');
+        }
+    }, [isDark]);
     const initialized = useRef(false);
     const [ready, setReady] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(false);
@@ -134,11 +145,13 @@ function AppContent() {
 
 export default function RootLayout() {
     return (
-        <GestureHandlerRootView style={styles.root}>
-            <ThemeProvider>
-                <AppContent />
-            </ThemeProvider>
-        </GestureHandlerRootView>
+        <SafeAreaProvider>
+            <GestureHandlerRootView style={styles.root}>
+                <ThemeProvider>
+                    <AppContent />
+                </ThemeProvider>
+            </GestureHandlerRootView>
+        </SafeAreaProvider>
     );
 }
 

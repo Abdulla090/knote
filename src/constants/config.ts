@@ -1,3 +1,5 @@
+import Constants from 'expo-constants';
+
 // ============================================
 // APP CONFIGURATION
 // ============================================
@@ -12,8 +14,17 @@ export const APP_CONFIG = {
 // ============================================
 // GEMINI AI CONFIG
 // ============================================
+
+// Read the API key from expo-constants (injected by app.config.js at build time).
+// This works reliably in both dev and EAS production builds, unlike process.env
+// which fails for secret-type EAS environment variables.
+const geminiKey =
+    Constants.expoConfig?.extra?.geminiApiKey ||
+    process.env.EXPO_PUBLIC_GEMINI_API_KEY ||
+    '';
+
 export const GEMINI_CONFIG = {
-    apiKey: process.env.EXPO_PUBLIC_GEMINI_API_KEY || '',
+    apiKey: geminiKey,
     models: {
         flash: 'gemini-2.5-flash',
         pro: 'gemini-2.5-pro',

@@ -45,6 +45,7 @@
       "expo-secure-store",
       "expo-localization",
       "expo-font",
+      "expo-navigation-bar",
       [
         "expo-av",
         {
